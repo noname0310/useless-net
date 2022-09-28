@@ -26,27 +26,22 @@ def make_autoencoder(image_size: Tuple[int, int] = (28, 28)) -> keras.Model:
     encoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(encoder)
     encoder = keras.layers.MaxPooling2D((2, 2), padding='same')(encoder)
 
+    encoder = keras.layers.Dense(32, activation='relu')(encoder)
+    encoder = keras.layers.Dense(32, activation='relu')(encoder)
+
     # Decoder
-    decoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(encoder)
+    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(encoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.UpSampling2D((2, 2))(decoder)
-    decoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoder)
+    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.UpSampling2D((2, 2))(decoder)
-    decoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoder)
+    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.UpSampling2D((2, 2))(decoder)
-    decoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoder)
+    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.UpSampling2D((2, 2))(decoder)
-    decoder = keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoder)
+    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.UpSampling2D((2, 2))(decoder)
-
-    decoder = keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same')(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-
-    decoder = keras.layers.Conv2D(3, (3, 3), activation='sigmoid', padding='same')(decoder)
+    decoder = keras.layers.Dense(3, activation='sigmoid')(decoder)
 
     autoencoder = keras.Model(input_layer, decoder)
     autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
