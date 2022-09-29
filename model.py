@@ -30,15 +30,24 @@ def make_autoencoder(image_size: Tuple[int, int] = (28, 28)) -> keras.Model:
     encoder = keras.layers.Dense(32, activation='relu')(encoder)
 
     # Decoder
-    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(encoder)
+    decoder = keras.layers.Conv2DTranspose(
+        32, (3, 3), strides=2, activation="relu", padding="same")(encoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
+    decoder = keras.layers.Conv2DTranspose(
+        32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
+    decoder = keras.layers.Conv2DTranspose(
+        32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
+    decoder = keras.layers.Conv2DTranspose(
+        32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
-    decoder = keras.layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
+    decoder = keras.layers.Conv2DTranspose(
+        32, (3, 3), strides=2, activation="relu", padding="same")(decoder)
+    decoder = keras.layers.Dense(32, activation='relu')(decoder)
+    decoder = keras.layers.Dense(32, activation='relu')(decoder)
+    decoder = keras.layers.Dense(32, activation='relu')(decoder)
+    decoder = keras.layers.Dense(32, activation='relu')(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
     decoder = keras.layers.Dense(32, activation='relu')(decoder)
     decoder = keras.layers.Dense(3, activation='sigmoid')(decoder)
